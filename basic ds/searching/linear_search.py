@@ -4,15 +4,8 @@ def linear_search(arr, key):
             return index
     return -1
 
-def main():
-    # taking input
-    arr = list(map(int, input().rstrip().split()))
-    key = int(input())
-    result = linear_search(arr, key)
-    if result == -1:
-        print(f"The Key Isn't Present")
-    else:
-        print(f"The Key Is Present On The Index {result}")
-
 if __name__=="__main__":
-    main()
+    arr = [9, 5, 0, -1, 5]
+    key = 5
+    result = linear_search(arr, key)
+    print(f"The Key Is Present On The Index {result}")

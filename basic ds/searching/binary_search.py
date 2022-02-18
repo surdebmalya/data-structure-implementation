@@ -11,18 +11,10 @@ def binary_search(arr, key, start, end):
         end = mid - 1
         return binary_search(arr, key, start, end)
 
-def main():
-    # taking input
-    arr = list(map(int, input().rstrip().split()))
-    # assuming the array is sorted in ascending order
-    key = int(input())
+if __name__=="__main__":
+    arr = [-1, 1, 9, 10, 55, 101]
+    key = 55
     start = 0
     end = len(arr) - 1
     result = binary_search(arr, key, start, end)
-    if result == -1:
-        print(f"The Key Isn't Present")
-    else:
-        print(f"The Key Is Present On The Index {result}")
-
-if __name__=="__main__":
-    main()
+    print(f"The Key Is Present On The Index {result}")
