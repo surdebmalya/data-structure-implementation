@@ -1,6 +1,3 @@
-from operator import sub
-
-
 def insertion_sort(arr):
     length = len(arr)
     if length == 0 or length == 1:
