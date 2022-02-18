@@ -1,4 +1,7 @@
-#User function Template for python3
+"""
+Question:
+https://practice.geeksforgeeks.org/problems/cyclically-rotate-an-array-by-one2614/1
+"""
 
 def rotate(arr, n):
     if n==0 or n==1:

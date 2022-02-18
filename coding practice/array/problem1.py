@@ -1,4 +1,7 @@
-#User function Template for python3
+"""
+Question:
+https://practice.geeksforgeeks.org/problems/reverse-a-string/1
+"""
 
 def reverseWord(s):
     #your code here

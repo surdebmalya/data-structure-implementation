@@ -1,4 +1,7 @@
-#User function Template for python3
+"""
+Question:
+https://practice.geeksforgeeks.org/problems/find-minimum-and-maximum-element-in-an-array4428/1/
+"""
 
 def getMinMax(a, n):
     minimum = a[0]

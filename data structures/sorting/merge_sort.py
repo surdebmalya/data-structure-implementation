@@ -48,8 +48,9 @@ def merge_sort(arr, start, end):
 
 if __name__=="__main__":
     # arr = [9, 5, 0, -1, 5]
-    arr = [8, -52, 0, 56, 1, 2, 2, 88, 4, 6]
+    # arr = [8, -52, 0, 56, 1, 2, 2, 88, 4, 6]
+    arr = [12, 11, 13, 5, 6, 7]
     start = 0
     end = len(arr) - 1
     merge_sort(arr, start, end)
-    print(f"Sorted Array: {arr}")
+    print(f"Sorted array is {arr}")
