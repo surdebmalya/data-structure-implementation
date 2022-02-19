@@ -1,6 +1,8 @@
 """
 Question:
 https://practice.geeksforgeeks.org/problems/reverse-a-string/1
+
+Easy
 """
 
 def reverseWord(s):

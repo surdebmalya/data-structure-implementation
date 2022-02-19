@@ -1,6 +1,8 @@
 """
 Question:
 https://practice.geeksforgeeks.org/problems/find-the-median0527/1
+
+Easy
 """
 
 class Solution:
