@@ -1,5 +1,6 @@
 def binary_search(arr, key, start, end):
-    mid = (start + end) // 2
+    # mid = (start + end) // 2
+    mid = start + (end - start) / 2
     if start>end:
         return -1
     if arr[mid] == key:
