@@ -1,10 +1,13 @@
-class Node:
-    def __init__(self, value):
-        self.val = value
-        self.left = None
-        self.right = None
+from typing import Any, Union, Optional
 
-def preorder_traversal(root):
+
+class Node:
+    def __init__(self, value: Any):
+        self.val: Any = value
+        self.left: Optional["Node"] = None
+        self.right: Optional["Node"] = None
+
+def preorder_traversal(root: Node):
     # root -> left -> right
     if root is None:
         return
@@ -13,7 +16,7 @@ def preorder_traversal(root):
     preorder_traversal(root.right)
 
 if __name__ == '__main__':
-    root = Node(10)
+    root: Node = Node(10)
     root.left = Node(5)
     root.left.left = Node(1)
     root.left.right = Node(7)
