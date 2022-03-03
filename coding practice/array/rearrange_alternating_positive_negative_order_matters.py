@@ -151,7 +151,7 @@ def rearrange(arr, length):
                         numberP-=1
 
 if __name__ == "__main__":
-    arr = [1, 2, 3, -4, -1, 4]
+    arr = [-5, -2, 5, 2, 4, 7, 1, 8, 0, -8]
     rearrange(arr, len(arr))
     for i in arr:
         print(i, end=" ")
