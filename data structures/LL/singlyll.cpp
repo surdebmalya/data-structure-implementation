@@ -5,7 +5,7 @@
 using namespace std;
 
 struct Node {
-    Node * next;
+    struct Node * next;
     int data;
 };
 
