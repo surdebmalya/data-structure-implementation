@@ -134,11 +134,36 @@ void bfs(struct Node *root) {
 }
 
 class CallStack {
-    
+    vector <struct Node *> stack;
+    int size = 0;
+public:
+    bool isEmpty() {
+        return size==0;
+    }
+
+    void push(struct Node * root) {
+        stack.push_back(root);
+        size++;
+    }
+
+    struct Node * pop() {
+        struct Node * ele = stack[size-1];
+        stack.pop_back();
+        return ele;
+    }
 };
 
-void dfs() {
-
+void dfs(struct Node * root) {
+    CallStack cs;
+    if (root==NULL) {
+        return;
+    }
+    else {
+        cs.push(root);
+        cout << root->value << " ";
+        dfs(root->left);
+        dfs(root->right);
+    }
 }
 
 // vector <int> left_view(struct Node * root) {
@@ -149,7 +174,9 @@ int main() {
     struct Node *root = newNode(1);
     root->left = newNode(2);
     root->right = newNode(3);
-    root->left->right = newNode(4);
+    root->left->left = newNode(4);
+    root->left->right = newNode(5);
+    root->left->right->right = newNode(6);
 
     cout << "Inorder Traversal: ";
     inorder_traversal(root);
@@ -171,6 +198,9 @@ int main() {
 
     cout << "BFS Tree: ";
     bfs(root);
+
+    cout << "DFS Tree: ";
+    dfs(root);
 
     return 0;
 }
