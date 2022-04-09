@@ -10,20 +10,20 @@ struct Node {
 };
 
 class List {
-    Node * head;
+    struct Node * head;
 public:
     List() {
         head = NULL;
     }
     void insert_end(int value) {
-        Node * temp = new Node();
+        struct Node * temp = new struct Node();
         temp->data = value;
         temp->next = NULL;
         if (head==NULL) {
             head = temp;
         }
         else {
-            Node * temp_head = head;
+            struct Node * temp_head = head;
             while (temp_head->next != NULL) {
                 temp_head = temp_head->next;
             }
@@ -31,7 +31,7 @@ public:
         }
     }
     void print_LL() {
-        Node * temp = head;
+        struct Node * temp = head;
         while (temp!=NULL) {
             cout << temp->data << "->";
             temp = temp->next;
@@ -40,7 +40,7 @@ public:
     }
     
     void insert_front(int value) {
-        Node * temp = new Node();
+        struct Node * temp = new struct Node();
         temp->data = value;
         temp->next = NULL;
         if (head==NULL) {
@@ -53,7 +53,7 @@ public:
     }
 
     int size() {
-        Node * temp = head;
+        struct Node * temp = head;
         int count = 0;
         while (temp!=NULL) {
             count++;
