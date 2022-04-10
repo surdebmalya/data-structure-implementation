@@ -191,6 +191,10 @@ void right_view (struct Node * root, int curr_level, int * max_level) {
     right_view (root->left, curr_level+1, max_level);
 }
 
+void top_view (struct Node * root) {
+    
+}
+
 int main() {
     struct Node *root = newNode(1);
     root->left = newNode(2);

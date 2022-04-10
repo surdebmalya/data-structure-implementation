@@ -1,8 +1,52 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <list>
+#include <unordered_set> // in <set> => stored in sorted order
 
 using namespace std;
+
+class FIFO {
+    list <int> queue;
+    int size = 0;
+public:
+    bool isEmpty() {
+        return size==0;
+    }
+
+    void enqueue (int value) {
+        queue.push_back(value);
+        size++;
+    }
+
+    int dequeue () {
+        int ele = queue.front();
+        queue.pop_front();
+        size--;
+        return ele;
+    }
+};
+
+void bfs(vector <vector <int>> graph, int root) {
+    // root should be given
+    FIFO queue;
+    unordered_set <int> visited;
+    queue.enqueue(root);
+    visited.insert(root);
+    while (not(queue.isEmpty())) {
+        int ele = queue.dequeue();
+        cout << ele << " ";
+        auto it = graph[ele].begin();
+        while (it != graph[ele].end()) {
+            if (visited.find(*it) == visited.end()) {
+                queue.enqueue(*it);
+                visited.insert(*it);
+            }
+            it++;
+        }
+    }
+    cout << endl;
+} 
 
 int main() {
     vector<vector<int>> graph = {
@@ -22,6 +66,9 @@ int main() {
         it++;
     }
     cout << endl;
+
+    cout << "BFS Traversal: ";
+    bfs(graph, 0);
 
     return 0;
 }
