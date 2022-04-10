@@ -166,9 +166,22 @@ void dfs(struct Node * root) {
     }
 }
 
-// vector <int> left_view(struct Node * root) {
+void left_view(struct Node * root, int curr_level, int * max_level) {
+    if (root==NULL) {
+        return;
+    }
+    if (curr_level > *max_level) {
+        cout << root->value << " ";
+        *max_level = curr_level;
+    }
+    left_view(root->left, curr_level+1, max_level);
+    left_view(root->right, curr_level+1, max_level);
+}
 
-// }
+void right_view (struct Node * root) {
+    // level order traversal but right cchild first then left child
+    
+}
 
 int main() {
     struct Node *root = newNode(1);
@@ -201,6 +214,12 @@ int main() {
 
     cout << "DFS Tree: ";
     dfs(root);
+    cout << endl;
+
+    cout << "Left View: ";
+    int max_level = 0;
+    left_view(root, 1, &max_level);
+    cout << endl;
 
     return 0;
 }
