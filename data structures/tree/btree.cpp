@@ -178,9 +178,17 @@ void left_view(struct Node * root, int curr_level, int * max_level) {
     left_view(root->right, curr_level+1, max_level);
 }
 
-void right_view (struct Node * root) {
+void right_view (struct Node * root, int curr_level, int * max_level) {
     // level order traversal but right cchild first then left child
-    
+    if (root==NULL) {
+        return;
+    }
+    if (curr_level>*max_level) {
+        cout << root->value << " ";
+        *max_level = curr_level;
+    }
+    right_view (root->right, curr_level+1, max_level);
+    right_view (root->left, curr_level+1, max_level);
 }
 
 int main() {
@@ -219,6 +227,11 @@ int main() {
     cout << "Left View: ";
     int max_level = 0;
     left_view(root, 1, &max_level);
+    cout << endl;
+
+    cout << "Right View: ";
+    int maximum_level = 0;
+    right_view(root, 1, &maximum_level);
     cout << endl;
 
     return 0;
