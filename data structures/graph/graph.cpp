@@ -46,7 +46,26 @@ void bfs(vector <vector <int>> graph, int root) {
         }
     }
     cout << endl;
-} 
+}
+
+void call_dfs (vector <vector <int>> graph, int node, unordered_set <int> &visited) {
+    if (visited.find(node) == visited.end()) {
+        cout << node << " ";
+        visited.insert(node);
+        auto it = graph[node].begin();
+        while (it != graph[node].end()) {
+            call_dfs (graph, *it, visited);
+            it++;
+        }
+    }
+}
+
+void dfs (vector <vector <int>> graph, int root) {
+    // assuming connected graph, thus root is given
+    unordered_set <int> visited;
+    call_dfs (graph, root, visited);
+    cout << endl;
+}
 
 int main() {
     vector<vector<int>> graph = {
@@ -69,6 +88,9 @@ int main() {
 
     cout << "BFS Traversal: ";
     bfs(graph, 0);
+
+    cout << "DFS Traversal: ";
+    dfs(graph, 0);
 
     return 0;
 }
