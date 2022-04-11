@@ -220,6 +220,14 @@ void right_view(struct Node *root, int curr_level, int *max_level) {
 }
 
 void top_view(struct Node *root) {
+    map <int, vector <int>> veritcal_order_map;
+    vertical_order(root, veritcal_order_map, 0);
+    auto it = veritcal_order_map.begin();
+    while (it != veritcal_order_map.end()) {
+        cout << (it->second)[0] << " ";
+        it++;
+    }
+    cout << endl;
 }
 
 int main() {
@@ -269,6 +277,10 @@ int main() {
     map<int, vector<int>> veritcal_order_map;
     vertical_order(root, veritcal_order_map, 0);
     print_vertical_order(veritcal_order_map);
+
+    cout << "Top View: ";
+    map<int, vector<int>> veritcal_order_map_top_view;
+    top_view(root);
 
     return 0;
 }
