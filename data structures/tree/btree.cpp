@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <iostream>
 #include <list>
+#include <map>
 #include <vector>
 
 using namespace std;
@@ -37,6 +38,33 @@ void preorder_traversal(struct Node *root) {
         preorder_traversal(root->right);
     } else {
         return;
+    }
+}
+
+void vertical_order(struct Node *root, map<int, vector<int>> &veritcal_order_map, int curr_order) {
+    if (root == NULL) {
+        return;
+    }
+
+    if (veritcal_order_map.find(curr_order) != veritcal_order_map.end()) {
+        veritcal_order_map[curr_order].push_back(root->value);
+    } else {
+        vector<int> temp_vec = {root->value};
+        veritcal_order_map[curr_order] = temp_vec;
+    }
+
+    vertical_order(root->left, veritcal_order_map, curr_order - 1);
+    vertical_order(root->right, veritcal_order_map, curr_order + 1);
+}
+
+void print_vertical_order(map<int, vector<int>> &vertical_order_map) {
+    auto it = vertical_order_map.begin();
+    while (it != vertical_order_map.end()) {
+        for (int index = 0; index < (it->second).size(); index++) {
+            cout << (it->second)[index] << " ";
+        }
+        cout << endl;
+        it++;
     }
 }
 
@@ -134,31 +162,31 @@ void bfs(struct Node *root) {
 }
 
 class CallStack {
-    vector <struct Node *> stack;
+    vector<struct Node *> stack;
     int size = 0;
+
 public:
     bool isEmpty() {
-        return size==0;
+        return size == 0;
     }
 
-    void push(struct Node * root) {
+    void push(struct Node *root) {
         stack.push_back(root);
         size++;
     }
 
-    struct Node * pop() {
-        struct Node * ele = stack[size-1];
+    struct Node *pop() {
+        struct Node *ele = stack[size - 1];
         stack.pop_back();
         return ele;
     }
 };
 
-void dfs(struct Node * root) {
+void dfs(struct Node *root) {
     CallStack cs;
-    if (root==NULL) {
+    if (root == NULL) {
         return;
-    }
-    else {
+    } else {
         cs.push(root);
         cout << root->value << " ";
         dfs(root->left);
@@ -166,33 +194,32 @@ void dfs(struct Node * root) {
     }
 }
 
-void left_view(struct Node * root, int curr_level, int * max_level) {
-    if (root==NULL) {
+void left_view(struct Node *root, int curr_level, int *max_level) {
+    if (root == NULL) {
         return;
     }
     if (curr_level > *max_level) {
         cout << root->value << " ";
         *max_level = curr_level;
     }
-    left_view(root->left, curr_level+1, max_level);
-    left_view(root->right, curr_level+1, max_level);
+    left_view(root->left, curr_level + 1, max_level);
+    left_view(root->right, curr_level + 1, max_level);
 }
 
-void right_view (struct Node * root, int curr_level, int * max_level) {
+void right_view(struct Node *root, int curr_level, int *max_level) {
     // level order traversal but right cchild first then left child
-    if (root==NULL) {
+    if (root == NULL) {
         return;
     }
-    if (curr_level>*max_level) {
+    if (curr_level > *max_level) {
         cout << root->value << " ";
         *max_level = curr_level;
     }
-    right_view (root->right, curr_level+1, max_level);
-    right_view (root->left, curr_level+1, max_level);
+    right_view(root->right, curr_level + 1, max_level);
+    right_view(root->left, curr_level + 1, max_level);
 }
 
-void top_view (struct Node * root) {
-    
+void top_view(struct Node *root) {
 }
 
 int main() {
@@ -237,6 +264,11 @@ int main() {
     int maximum_level = 0;
     right_view(root, 1, &maximum_level);
     cout << endl;
+
+    cout << "Vertical Order: " << endl;
+    map<int, vector<int>> veritcal_order_map;
+    vertical_order(root, veritcal_order_map, 0);
+    print_vertical_order(veritcal_order_map);
 
     return 0;
 }
