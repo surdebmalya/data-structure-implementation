@@ -1,6 +1,8 @@
 #include <algorithm>
 #include <iostream>
 #include <vector>
+#include <unordered_map>
+#include <map>
 
 using namespace std;
 
@@ -12,6 +14,36 @@ void print_container(T container) {
         it++;
     }
     cout << endl;
+}
+
+void sort_on_key(unordered_map <char, int> & container) {
+    map <char, int> sorted_map;
+    auto it = container.begin();
+    while (it != container.end()) {
+        sorted_map.insert(make_pair(it->first, it->second));
+        it++;
+    }
+
+    auto itp = sorted_map.begin();
+    while (itp != sorted_map.end()) {
+        cout << "[" << itp->first << "] : " << itp->second << endl;
+        itp++;
+    }
+}
+
+void sort_on_value(unordered_map <char, int> & container) {
+    map <int, char> sorted_map;
+    auto it = container.begin();
+    while (it != container.end()) {
+        sorted_map.insert(make_pair(it->second, it->first));
+        it++;
+    }
+
+    auto itp = sorted_map.begin();
+    while (itp != sorted_map.end()) {
+        cout << "[" << itp->second << "] : " << itp->first << endl;
+        itp++;
+    }
 }
 
 int main() {
@@ -29,6 +61,16 @@ int main() {
     // partial sort
     sort(characters.begin(), characters.begin()+3);
     print_container(characters);
+
+    unordered_map <char, int> um;
+    um.insert(make_pair('B', 2));
+    um.insert(make_pair('C', 1));
+    um.insert(make_pair('A', 3));
+    cout << "Sort on KEY: " << endl;
+    sort_on_key(um);
+
+    cout << "Sort on VALUE: " << endl;
+    sort_on_value(um);
 
     return 0;
 }
