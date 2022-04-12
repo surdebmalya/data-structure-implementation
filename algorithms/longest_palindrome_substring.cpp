@@ -6,7 +6,11 @@
 using namespace std;
 
 int longest_palindrome_substring(char str_arg[]) {
-    int n = strlen(str_arg); // 8
+    /*
+     * Time Complexity: O(n^2)
+     * Space Complexity: O(n^2)
+     */
+    int n = strlen(str_arg);
     string str = "0" + (string)str_arg;
     cout << "Final String: " << str << endl;
     int dp[n + 1][n + 1];
