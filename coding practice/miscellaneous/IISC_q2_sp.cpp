@@ -1,66 +1,101 @@
-// Raju's GATE coaching adventures 
+/*
+Question Statement: https://file.io/npWFuEIg3o9O
+*/
 
-// Raju is preparing for GATE to join liSc. He has joined Mogambo's 
-// GATE coaching institute that has given him several chapters of notes to study. 
-// The chapters are numbered using integers. There are dependencies between the 
-// chapters, expressed as N -> M, which means that chapter number N depends on 
-// chapter number M. This dependency means that Raju must first study chapter number 
-// M before studying chapter number N. 
-
-// Unfortunately, Mogambo's GATE coaching institute has not done a good job in 
-// preparing the chapters. There may be circular dependencies between the chapters, 
-// which would mean that Raju cannot study using these notes. 
-
-// Raju wishes to efficiently determine whether there is a circular dependency in 
-// the chapters given to him that would prevent him from making use of the notes. 
-
-// Write a program to help Raju make this determination. 
-
-// INPUT: The input to your program will be a set of dependencies between the chapters, 
-// with each dependency given on a single line N -> M. on standard input. The chapter 
-// numbers need not be in serial order. You should also not expect to see all chapters 
-// from 1 onwards, since there may be missing chapters in the set of notes. You should 
-// also not make any assumptions that if N -> M is listed as a dependency, then integer 
-// M will be numerically smaller than integer N.
-
-// TIME LIMIT: The correctness of your algorithm using 10 test cases. You will receive 
-// 1 point for every test case for which your algorithm produces the correct answer. 
-// Furthermore. your algorithm must be able to compute the answer to the problem within 
-// 5 seconds of wall-clock time on our server for each of these test cases. If your 
-// algorithm times-out on our test server for one of our test cases. then you will 
-// receive 0 points for that test case.
-
-// OUTPUT: Your program should output 1 if there Is a circular dependency between the 
-// chapters. and 0 otherwise. 
-
-// SAMPLE INPUT 1:
-// 100 -> 6 
-// 99 -> 7 
-// 34 -> 55 
-// 6 -> 55 
-// 7 -> 74 
-// 55 -> 16 
-// 16 -> 100 
-// SAMPLE OUTPUT 1:
-// 1
-
-// SAMPLE INPUT 2:
-// 100 -> 6 
-// 99 -> 7 
-// 34 -> 55 
-// 6 -> 55 
-// 7 -> 74 
-// 55 -> 16 
-// SAMPLE OUTPUT 2:
-// 0
-
-#include <iostream>
 #include <cmath>
+#include <iostream>
+#include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 using namespace std;
 
+unordered_map<int, char> initialize_color(unordered_map<int, vector<int>> &graph) {
+    unordered_map<int, char> result;
+    auto it = graph.begin();
+    while (it != graph.end()) {
+        result.insert(make_pair(it->first, 'W'));
+        it++;
+    }
+    return result;
+}
+
+void call_dfs(int curr_node, unordered_map<int, vector<int>> &graph, unordered_map<int, char> &color, int *cycle_or_not) {
+    auto it_adjacency = graph[curr_node].begin();
+    while (it_adjacency != graph[curr_node].end()) {
+        if (color[*it_adjacency] == 'G') {
+            *cycle_or_not = 1; // Grey -> Grey: back edge
+        } else if (color[*it_adjacency] == 'W') {
+            color[*it_adjacency] = 'G';
+            call_dfs(*it_adjacency, graph, color, cycle_or_not);
+        }
+        it_adjacency++;
+    }
+    color[curr_node] = 'B';
+}
+
+int dfs(unordered_map<int, vector<int>> &graph, unordered_set<int> &nodes) {
+    unordered_map<int, char> color = initialize_color(graph);
+    int cycle_or_not = 0;
+    auto it_node = nodes.begin();
+    while (it_node != nodes.end()) { // loop for every nodes of the graph
+        int curr_node = *it_node;
+        if (color[curr_node] == 'W') {
+            color[curr_node] = 'G';
+            call_dfs(curr_node, graph, color, &cycle_or_not);
+            if (cycle_or_not != 0) {
+                return 1; // cycle exists
+            }
+        }
+        it_node++;
+    }
+    return 0;
+}
+
+unordered_set<int> all_nodes(unordered_map<int, vector<int>> &graph) {
+    unordered_set<int> nodes;
+    auto it = graph.begin();
+    while (it != graph.end()) {
+        nodes.insert(it->first);
+        it++;
+    }
+    return nodes;
+}
+
+void print_graph(unordered_map<int, vector<int>> &graph) {
+    auto it = graph.begin();
+    while (it != graph.end()) {
+        cout << it->first << " : ";
+        for (int index = 0; index < (it->second).size(); index++) {
+            cout << (it->second)[index] << " ";
+        }
+        cout << endl;
+        it++;
+    }
+}
+
 int main() {
+    unordered_map<int, vector<int>> graph;
+    int source, destination;
+    string arrow;
+    while (cin >> source >> arrow >> destination) {
+        if (graph.find(source) != graph.end()) {
+            graph[source].push_back(destination);
+        } else {
+            vector<int> temp_vector;
+            temp_vector.push_back(destination);
+            graph[source] = temp_vector;
+        }
+        if (graph.find(destination) == graph.end()) {
+            vector<int> temp_vector = {};
+            graph[destination] = temp_vector;
+        }
+    }
+
+    // print_graph(graph);
+
+    unordered_set<int> keys = all_nodes(graph);
+    cout << dfs(graph, keys) << endl;
 
     return 0;
 }
