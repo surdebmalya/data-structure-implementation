@@ -1,5 +1,5 @@
 /*
-Question Statement: https://file.io/npWFuEIg3o9O
+Question Statement: https://i.ibb.co/HTW05RQ/problem-statement.png
 */
 
 #include <cmath>
