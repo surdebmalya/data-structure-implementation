@@ -1,8 +1,11 @@
-// https://leetcode.com/problems/fibonacci-number/
+/*
+https://leetcode.com/problems/fibonacci-number/
 
-// Easy
+Easy
+*/
 
 #include <bits/stdc++.h>
+using namespace std;
 
 class Solution {
 public:
