@@ -8,6 +8,9 @@ public:
     int Age;
 
     Employee(string name, int age) {
+        // It is going to overwritten the default constructor's code
+        // Should not be any return type
+        // should be undet the public access specifier
         Name = name;
         Age = age;
     }
