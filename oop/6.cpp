@@ -1,3 +1,5 @@
+// Inheritence-2
+
 // Protected access modifier
 /* 
 Under this access modifier, the variables and methods can be 

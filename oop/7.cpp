@@ -1,4 +1,10 @@
-// Inheritence-1
+// Inheritence-2
+
+/*
+Normally the inherited variables and methods are private, 
+so to access them in the developer class also, you have
+to use the "public" keyword while inheritence.
+*/
 
 #include <iostream>
 
@@ -10,17 +16,14 @@ class AbstractEmployee {
 
 class Employee : AbstractEmployee {
 private:
-    string Name;
     int Age;
 
+protected:
+    string Name;
 public:
     Employee(string name, int age) {
         Name = name;
         Age = age;
-    }
-
-    string getName() {
-        return Name;
     }
 
     void AskForPromotion() {
@@ -31,8 +34,9 @@ public:
     }
 };
 
-class Developer: Employee { // here inheritence happend
-// now, all the public methods of Employee are also accessable from this class
+class Developer: public Employee {
+// here we make the inheritence privates as private,
+// public as public and same for protected also
 public:
     string FavoriteProgrammingLanguage;
     Developer(string name, int age, string language): Employee(name, age) {
@@ -40,13 +44,15 @@ public:
     }
 
     void FixBug() {
-        cout << getName() << " fixed bug using " << FavoriteProgrammingLanguage << endl;
+        cout << Name << " fixed bug using " << FavoriteProgrammingLanguage << endl;
     }
 };
 
 int main() {
     Developer d = Developer("Debmalya", 21, "C++");
     d.FixBug();
+
+    d.AskForPromotion();
 
     return 0;
 }
