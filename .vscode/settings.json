@@ -45,6 +45,7 @@
         "typeinfo": "cpp",
         "unordered_set": "cpp",
         "bitset": "cpp",
-        "regex": "cpp"
+        "regex": "cpp",
+        "valarray": "cpp"
     }
 }
