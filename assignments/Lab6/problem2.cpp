@@ -1,30 +1,18 @@
 class Solution
 {
     public:
-    //Function to sort a linked list of 0s, 1s and 2s.
-    Node* segregate(Node *head) {
-        int zeros=0, ones=0;
-        Node* curr = head;
-        while(curr) {
-            if(curr->data==0) zeros++;
-            else if(curr->data==1) ones++;
-            curr=curr->next;
+        vector <int> search(string pat, string txt) {
+            //code here.
+            vector<int>v;
+            int n=txt.size(),m=pat.size();
+            for(int i=0;i<n;i++){
+                  string temp=txt.substr(i,m);
+                  if(temp==pat){
+                      v.push_back(i+1);
+                  }
+            }
+            if(v.empty()) return  {-1};
+            return v;
         }
-        curr=head;
-        while(curr) {
-            if(zeros) {
-                curr->data=0;
-                zeros--;
-            }
-            else if(ones) {
-                curr->data=1;
-                ones--;
-            }
-            else {
-                curr->data=2;
-            }
-            curr = curr->next;
-        }
-        return head;
-    }
+     
 };
