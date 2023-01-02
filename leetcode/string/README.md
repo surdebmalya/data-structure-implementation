@@ -1,0 +1,2 @@
+detect-capital
+longest-palindromic-substring
