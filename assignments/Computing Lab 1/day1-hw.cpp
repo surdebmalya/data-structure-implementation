@@ -6,7 +6,7 @@ using namespace std;
 vector<vector<int>> solve(vector<vector<int>>& key, vector<vector<int>>& currVector) {
     vector<vector<int>> result;
     for(int i=0; i<key.size(); i++) {
-        int val;
+        int val=0;
         for(int j=0; j<key[0].size(); j++) {
             val += key[i][j]*currVector[j][0];
         }
@@ -21,8 +21,8 @@ int main() {
     string cipherText = "YITJPGWJOWFAQTQXCSMAETSQUSQAPUSQGKCPQTYJ";
     // given the inverse key
     vector<vector<int>> key = {
-       {5, 1},
-       {2, 7}
+        {5, 1},
+        {2, 7}
     };
     
     int N = key.size();
