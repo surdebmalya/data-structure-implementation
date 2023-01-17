@@ -6,3 +6,4 @@ tree
 bit manipulation
 maths
 union find
+dynamic programming
