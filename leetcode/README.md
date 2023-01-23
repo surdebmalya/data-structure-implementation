@@ -7,3 +7,4 @@ bit manipulation
 maths
 union find
 dynamic programming
+map
